@@ -214,41 +214,51 @@ body {
     font-size: 0.95rem;
 }
 
-.cta-button {
-    width: 100%;
-    padding: 1.25rem 2rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+.participants-section {
+    margin-top: 2rem;
 }
 
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
-    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
-}
-
-.cta-button:active {
-    transform: translateY(0);
-}
-
-.button-arrow {
+.participants-section h3 {
     font-size: 1.5rem;
-    transition: transform 0.3s ease;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-light);
 }
 
-.cta-button:hover .button-arrow {
-    transform: translateX(5px);
+.participants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.participant-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.participant-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.participant-emoji {
+    font-size: 2rem;
+}
+
+.participant-name {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    text-align: center;
+    font-weight: 500;
 }
 
 .footer {
@@ -321,9 +331,13 @@ body {
         font-size: 1.5rem;
     }
     
-    .cta-button {
-        padding: 1rem 1.5rem;
-        font-size: 1.1rem;
+    .participants-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 0.75rem;
+    }
+    
+    .participant-card {
+        padding: 1rem 0.75rem;
     }
 }
 
@@ -342,5 +356,17 @@ body {
     
     .info-text p {
         font-size: 0.9rem;
+    }
+    
+    .participants-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .participant-emoji {
+        font-size: 1.5rem;
+    }
+    
+    .participant-name {
+        font-size: 0.85rem;
     }
 }
