@@ -146,7 +146,7 @@
                         <span class="participant-emoji">🎨</span>
                         <span class="participant-name">Rubén</span>
                     </div>
-                    <div class="participant-card">
+                    <div class="participant-card" id="sol-card">
                         <span class="participant-emoji">🌠</span>
                         <span class="participant-name">Sol</span>
                     </div>
@@ -158,5 +158,46 @@
             <p>🎄 Felices Fiestas · Civitatis Team 2025 🎄</p>
         </footer>
     </div>
+
+    <script>
+        let solClickCount = 0;
+        let solTimeout;
+        const solCard = document.getElementById('sol-card');
+
+        solCard.addEventListener('click', function() {
+            solClickCount++;
+            
+            clearTimeout(solTimeout);
+            solTimeout = setTimeout(() => {
+                solClickCount = 0;
+            }, 1000);
+
+            if (solClickCount === 3) {
+                solClickCount = 0;
+                triggerSunEasterEgg();
+            }
+        });
+
+        function triggerSunEasterEgg() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createFloatingSun();
+                }, i * 100);
+            }
+        }
+
+        function createFloatingSun() {
+            const sun = document.createElement('div');
+            sun.className = 'floating-sun';
+            sun.textContent = '☀️';
+            sun.style.left = Math.random() * 100 + '%';
+            sun.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(sun);
+
+            setTimeout(() => {
+                sun.remove();
+            }, 5000);
+        }
+    </script>
 </body>
 </html>

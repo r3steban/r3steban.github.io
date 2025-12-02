@@ -274,6 +274,34 @@ body {
     animation: fadeIn 0.8s ease-out 0.4s both;
 }
 
+.floating-sun {
+    position: fixed;
+    bottom: -10%;
+    font-size: 3rem;
+    pointer-events: none;
+    z-index: 9999;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        bottom: -10%;
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        bottom: 110%;
+        opacity: 0;
+        transform: translateY(-50px) rotate(360deg);
+    }
+}
+
 @keyframes fadeInDown {
     from {
         opacity: 0;
