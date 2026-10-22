@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CiviLotería 2026 - Tecnología</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=DM+Sans:wght@400;500;700&display=swap">
+    <style>
+        :root {
+            --pink: #EA0558;
+            --pink-dark: #B8003F;
+            --pink-deep: #5C0022;
+            --pink-soft: #FFD6E5;
+            --cream: #FFF6EC;
+            --gold: #F4C35A;
+            --gold-dark: #C9932A;
+            --green: #1F6B4A;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--cream);
+            background:
+                radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.12), transparent 40%),
+                radial-gradient(circle at 85% 90%, rgba(244, 195, 90, 0.18), transparent 45%),
+                linear-gradient(160deg, var(--pink) 0%, var(--pink-dark) 55%, var(--pink-deep) 100%);
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+        }
+
+        /* Nieve */
+        .snow { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+        .flake {
+            position: absolute;
+            top: -20px;
+            color: #fff;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Guirnalda de luces */
+        .lights {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 8px;
+            z-index: 1;
+            border-top: 3px solid var(--pink-deep);
+        }
+        .bulb {
+            width: 12px; height: 18px;
+            border-radius: 50%;
+            margin-top: 6px;
+            animation: twinkle 1.6s ease-in-out infinite;
+        }
+        .bulb:nth-child(4n+1) { background: var(--gold); color: var(--gold); }
+        .bulb:nth-child(4n+2) { background: #fff; color: #fff; animation-delay: .4s; }
+        .bulb:nth-child(4n+3) { background: #7CE0A8; color: #7CE0A8; animation-delay: .8s; }
+        .bulb:nth-child(4n+4) { background: var(--pink-soft); color: var(--pink-soft); animation-delay: 1.2s; }
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; box-shadow: 0 0 12px 2px currentColor; }
+            50% { opacity: .35; box-shadow: none; }
+        }
+
+        .card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 560px;
+            text-align: center;
+            padding: 48px 32px 40px;
+            margin-top: 24px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, .4);
+            border-radius: 999px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-weight: 900;
+            font-size: clamp(2.2rem, 7vw, 3.4rem);
+            line-height: 1.05;
+            margin-bottom: 12px;
+        }
+        h1 span { color: var(--gold); }
+
+        .lead {
+            font-size: 1.05rem;
+            opacity: .9;
+            margin-bottom: 32px;
+        }
+
+        /* Décimo */
+        .ticket {
+            position: relative;
+            background: var(--cream);
+            color: var(--pink-deep);
+            border-radius: 18px;
+            padding: 28px 20px 24px;
+            box-shadow: 0 20px 50px rgba(60, 0, 20, .45);
+            margin-bottom: 32px;
+            transform: rotate(-1.5deg);
+            transition: transform .3s ease;
+        }
+        .ticket:hover { transform: rotate(0deg) scale(1.02); }
+        .ticket::before, .ticket::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: var(--pink-dark);
+            transform: translateY(-50%);
+        }
+        .ticket::before { left: -14px; }
+        .ticket::after { right: -14px; }
+
+        .ticket-label {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 10px;
+        }
+
+        .number {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .digit {
+            font-family: 'Fraunces', serif;
+            font-weight: 900;
+            font-size: clamp(2.4rem, 11vw, 4.2rem);
+            width: 1.25em;
+            padding: 6px 0;
+            border-radius: 12px;
+            background: var(--pink);
+            color: #fff;
+            box-shadow: inset 0 -6px 0 var(--pink-dark);
+            animation: pop .6s cubic-bezier(.3, 1.6, .5, 1) backwards;
+        }
+        .digit:nth-child(2) { animation-delay: .1s; }
+        .digit:nth-child(3) { animation-delay: .2s; }
+        .digit:nth-child(4) { animation-delay: .3s; }
+        .digit:nth-child(5) { animation-delay: .4s; }
+        @keyframes pop {
+            from { transform: scale(0) rotate(-20deg); opacity: 0; }
+        }
+
+        .ticket-meta {
+            font-size: .9rem;
+            border-top: 2px dashed var(--pink-soft);
+            padding-top: 12px;
+        }
+
+        .copy {
+            margin-top: 12px;
+            background: none;
+            border: 1px solid var(--pink);
+            color: var(--pink);
+            font: inherit;
+            font-size: .85rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+        .copy:hover { background: var(--pink); color: #fff; }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: var(--pink-deep);
+            background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
+            padding: 16px 32px;
+            border-radius: 999px;
+            box-shadow: 0 8px 0 #8E6418, 0 14px 30px rgba(0, 0, 0, .3);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .cta:hover { transform: translateY(-2px); }
+        .cta:active { transform: translateY(6px); box-shadow: 0 2px 0 #8E6418, 0 6px 14px rgba(0, 0, 0, .3); }
+
+        .hint {
+            margin-top: 22px;
+            font-size: .95rem;
+            opacity: .9;
+        }
+        .hint strong {
+            color: var(--gold);
+            letter-spacing: .08em;
+        }
+
+        .countdown {
+            margin-top: 36px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        .count-box {
+            min-width: 68px;
+            padding: 10px 6px;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 12px;
+        }
+        .count-box strong {
+            display: block;
+            font-family: 'Fraunces', serif;
+            font-size: 1.6rem;
+        }
+        .count-box small { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; opacity: .8; }
+
+        .footnote {
+            margin-top: 28px;
+            font-size: .85rem;
+            opacity: .75;
+        }
+        .back { color: inherit; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lights" aria-hidden="true"></div>
+    <div class="snow" aria-hidden="true"></div>
+
+    <main class="card">
+        <div class="eyebrow">🎄 Equipo de Tecnología · Navidad 2026</div>
+        <h1>Nuestro número <span>de la suerte</span></h1>
+        <p class="lead">Contra todo pronóstico, este año jugamos al…</p>
+
+        <div class="ticket">
+            <div class="ticket-label">Sorteo Extraordinario de Navidad</div>
+            <div class="number" aria-label="Número 71352">
+                <span class="digit">7</span>
+                <span class="digit">1</span>
+                <span class="digit">3</span>
+                <span class="digit">5</span>
+                <span class="digit">2</span>
+            </div>
+            <div class="ticket-meta">22 de diciembre de 2026 · ✨ Que la suerte nos acompañe ✨</div>
+            <button class="copy" type="button" id="copy">📋 Copiar número</button>
+        </div>
+
+        <a class="cta" href="https://www.loteriabarquillo10.es/loteria-de-navidad/comprar-loteria-de-navidad" target="_blank" rel="noopener">
+            🎟️ Comprar décimo
+        </a>
+        <p class="hint">🔎 En la web, escribe <strong>71352</strong> en el buscador de números.</p>
+
+        <div class="countdown" id="countdown" aria-label="Cuenta atrás para el sorteo">
+            <div class="count-box"><strong id="d">--</strong><small>días</small></div>
+            <div class="count-box"><strong id="h">--</strong><small>horas</small></div>
+            <div class="count-box"><strong id="m">--</strong><small>min</small></div>
+        </div>
+
+        <p class="footnote">🎅 Si toca, nadie hace deploy en viernes nunca más. · <a class="back" href="../">Volver</a></p>
+    </main>
+
+    <script>
+        const NUMBER = '71352';
+        const DRAW_DATE = new Date('2026-12-22T09:00:00+01:00');
+
+        const lights = document.querySelector('.lights');
+        for (let i = 0; i < 24; i++) {
+            lights.appendChild(Object.assign(document.createElement('span'), { className: 'bulb' }));
+        }
+
+        const snow = document.querySelector('.snow');
+        const flakes = ['❄', '❅', '❆', '✦'];
+        for (let i = 0; i < 30; i++) {
+            const flake = document.createElement('span');
+            flake.className = 'flake';
+            flake.textContent = flakes[i % flakes.length];
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.fontSize = 10 + Math.random() * 16 + 'px';
+            flake.style.animationDuration = 6 + Math.random() * 8 + 's';
+            flake.style.animationDelay = -Math.random() * 12 + 's';
+            snow.appendChild(flake);
+        }
+
+        const copyBtn = document.getElementById('copy');
+        copyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(NUMBER);
+                copyBtn.textContent = '✅ ¡Copiado!';
+            } catch {
+                copyBtn.textContent = NUMBER;
+            }
+            setTimeout(() => { copyBtn.textContent = '📋 Copiar número'; }, 2000);
+        });
+
+        function tick() {
+            const diff = DRAW_DATE - new Date();
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = '<p>🍀 ¡Ya ha sido el sorteo! A comprobar el décimo…</p>';
+                return;
+            }
+            document.getElementById('d').textContent = Math.floor(diff / 864e5);
+            document.getElementById('h').textContent = Math.floor(diff / 36e5) % 24;
+            document.getElementById('m').textContent = Math.floor(diff / 6e4) % 60;
+        }
+        tick();
+        setInterval(tick, 30000);
+    </script>
+</body>
+</html>
